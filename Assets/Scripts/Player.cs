@@ -10,8 +10,6 @@ public class Player : MonoBehaviour, InputSystem_Actions.IPlayerActions
     private bool _running = false;
     private bool _dancing = false;
     private MoveBehaviour _mB;
-    [SerializeField] private Transform cameraPosition;
-    [SerializeField] private float cameraSensibility = 10;
     private void Awake()
     {
         inputActions = new InputSystem_Actions();
@@ -29,9 +27,8 @@ public class Player : MonoBehaviour, InputSystem_Actions.IPlayerActions
     }
     private void FixedUpdate()
     {
-        if(_dancing)
-            _movement = Vector2.zero;
-        _mB.MoveCharacter(new Vector3(_movement.x, 0, _movement.y), _running);
+        if(!_dancing)
+            _mB.MoveCharacter(new Vector3(_movement.x, 0, _movement.y), _running);
     }
     public void OnMove(InputAction.CallbackContext context)
     {
@@ -58,5 +55,10 @@ public class Player : MonoBehaviour, InputSystem_Actions.IPlayerActions
             _aB.Dance(false);
             _dancing = false;
         }
+    }
+
+    public void OnJump(InputAction.CallbackContext context)
+    {
+        _mB.Jump();
     }
 }

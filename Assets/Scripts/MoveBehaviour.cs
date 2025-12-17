@@ -11,6 +11,7 @@ public class MoveBehaviour : MonoBehaviour
     [SerializeField] private Transform cameraPosition;
     [SerializeField] private float steerSpeed = 10;
     [SerializeField] private float gravity = -2;
+    [SerializeField] private float jumpForce = 2;
     private void Awake()
     {
         _cC = GetComponent<CharacterController>();
@@ -51,5 +52,13 @@ public class MoveBehaviour : MonoBehaviour
     private void Run(Vector3 movement)
     {
         _cC.Move(movement * speed * sprintMultiplier * Time.deltaTime);
+    }
+    public void Jump()
+    {
+        Debug.Log("Hola");
+        if (_cC.isGrounded)
+        {
+            velocity.y = jumpForce;
+        }
     }
 }
