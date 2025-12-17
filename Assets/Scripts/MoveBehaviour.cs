@@ -9,6 +9,7 @@ public class MoveBehaviour : MonoBehaviour
     [SerializeField] private float speed = 4;
     [SerializeField] private float sprintMultiplier = 2;
     [SerializeField] private Transform cameraPosition;
+    [SerializeField] private float steerSpeed = 10;
     [SerializeField] private float gravity = -2;
     private void Awake()
     {
@@ -32,11 +33,16 @@ public class MoveBehaviour : MonoBehaviour
         Vector3 right = cameraPosition.right;
         right.y = 0;
         Vector3 movement = direction.x * right + direction.z * forward;
+        if(movement.sqrMagnitude > 0.001)
+        {
+            Quaternion rotation = Quaternion.LookRotation(movement);
+            transform.rotation = Quaternion.Slerp(transform.rotation, rotation, steerSpeed * Time.deltaTime);
+        }
         if(!run)
             Walk(movement);
         else
             Run(movement);
-        _aB.Walk(movement);
+        _aB.Move(movement, run);
     }
     private void Walk(Vector3 movement)
     {

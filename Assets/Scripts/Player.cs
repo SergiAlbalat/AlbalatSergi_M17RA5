@@ -8,6 +8,7 @@ public class Player : MonoBehaviour, InputSystem_Actions.IPlayerActions
     private AnimationBehaviour _aB;
     private Vector2 _movement;
     private bool _running = false;
+    private bool _dancing = false;
     private MoveBehaviour _mB;
     [SerializeField] private Transform cameraPosition;
     [SerializeField] private float cameraSensibility = 10;
@@ -28,15 +29,9 @@ public class Player : MonoBehaviour, InputSystem_Actions.IPlayerActions
     }
     private void FixedUpdate()
     {
+        if(_dancing)
+            _movement = Vector2.zero;
         _mB.MoveCharacter(new Vector3(_movement.x, 0, _movement.y), _running);
-
-        Vector3 lookDirection = cameraPosition.forward;
-        lookDirection.y = 0;
-        if(lookDirection.sqrMagnitude > 0.01f)
-        {
-            Quaternion playerRotation = Quaternion.LookRotation(lookDirection);
-            transform.rotation = Quaternion.Slerp(transform.rotation, playerRotation, cameraSensibility * Time.deltaTime);
-        }
     }
     public void OnMove(InputAction.CallbackContext context)
     {
@@ -54,8 +49,14 @@ public class Player : MonoBehaviour, InputSystem_Actions.IPlayerActions
     public void OnDance(InputAction.CallbackContext context)
     {
         if (context.performed)
+        {
             _aB.Dance(context.performed);
+            _dancing = true;
+        }
         if (context.canceled)
+        {
             _aB.Dance(false);
+            _dancing = false;
+        }
     }
 }
