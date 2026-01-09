@@ -26,6 +26,14 @@ public class MoveBehaviour : MonoBehaviour
         }
         velocity.y += gravity * Time.deltaTime;
         _cC.Move(velocity * Time.deltaTime);
+        if (!_cC.isGrounded)
+        {
+            _aB.Fall();
+        }
+        else
+        {
+            _aB.OnGround();
+        }
     }
     public void MoveCharacter(Vector3 direction, bool run)
     {
@@ -55,10 +63,10 @@ public class MoveBehaviour : MonoBehaviour
     }
     public void Jump()
     {
-        Debug.Log("Hola");
         if (_cC.isGrounded)
         {
             velocity.y = jumpForce;
+            _aB.Jump();
         }
     }
 }

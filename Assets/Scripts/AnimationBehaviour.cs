@@ -14,7 +14,14 @@ public class AnimationBehaviour : MonoBehaviour
     }
     public void Jump()
     {
-        animator.SetBool("Jump", true);
-        animator.SetBool("Jump", false);
+        animator.SetTrigger("Jump");
+    }
+    public void Fall()
+    {
+        animator.SetBool("Falling", true);
+    }
+    public void OnGround()
+    {
+        animator.SetBool("Falling", false);
     }
 }

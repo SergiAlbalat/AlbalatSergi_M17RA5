@@ -59,7 +59,9 @@ public class Player : MonoBehaviour, InputSystem_Actions.IPlayerActions
 
     public void OnJump(InputAction.CallbackContext context)
     {
-        _mB.Jump();
-        _aB.Jump();
+        if (context.performed)
+        {
+            _mB.Jump();
+        }
     }
 }
