@@ -9,6 +9,7 @@ public class MoveBehaviour : MonoBehaviour
     [SerializeField] private float speed = 4;
     [SerializeField] private float sprintMultiplier = 2;
     [SerializeField] private Transform cameraPosition;
+    [SerializeField] private Transform aimCameraPosition;
     [SerializeField] private float steerSpeed = 10;
     [SerializeField] private float gravity = -2;
     [SerializeField] private float jumpForce = 2;
@@ -35,17 +36,25 @@ public class MoveBehaviour : MonoBehaviour
             _aB.OnGround();
         }
     }
-    public void MoveCharacter(Vector3 direction, bool run)
+    public void MoveCharacter(Vector3 direction, bool run, bool aiming)
     {
         Vector3 forward = cameraPosition.forward;
         forward.y = 0;
         Vector3 right = cameraPosition.right;
         right.y = 0;
         Vector3 movement = direction.x * right + direction.z * forward;
-        if(movement.sqrMagnitude > 0.001)
+        if (aiming)
         {
-            Quaternion rotation = Quaternion.LookRotation(movement);
+            Quaternion rotation = Quaternion.LookRotation(aimCameraPosition.forward);
             transform.rotation = Quaternion.Slerp(transform.rotation, rotation, steerSpeed * Time.deltaTime);
+        }
+        else
+        {
+            if (movement.sqrMagnitude > 0.001)
+            {
+                Quaternion rotation = Quaternion.LookRotation(movement);
+                transform.rotation = Quaternion.Slerp(transform.rotation, rotation, steerSpeed * Time.deltaTime);
+            }
         }
         if(!run)
             Walk(movement);

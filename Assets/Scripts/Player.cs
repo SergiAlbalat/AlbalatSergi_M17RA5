@@ -9,6 +9,7 @@ public class Player : MonoBehaviour, InputSystem_Actions.IPlayerActions
     private Vector2 _movement;
     private bool _running = false;
     private bool _dancing = false;
+    private bool _aiming = false;
     private MoveBehaviour _mB;
     private void Awake()
     {
@@ -28,7 +29,7 @@ public class Player : MonoBehaviour, InputSystem_Actions.IPlayerActions
     private void FixedUpdate()
     {
         if(!_dancing)
-            _mB.MoveCharacter(new Vector3(_movement.x, 0, _movement.y), _running);
+            _mB.MoveCharacter(new Vector3(_movement.x, 0, _movement.y), _running, _aiming);
     }
     public void OnMove(InputAction.CallbackContext context)
     {
@@ -62,6 +63,20 @@ public class Player : MonoBehaviour, InputSystem_Actions.IPlayerActions
         if (context.performed)
         {
             _mB.Jump();
+        }
+    }
+
+    public void OnAim(InputAction.CallbackContext context)
+    {
+        if (context.performed)
+        {
+            _aiming = true;
+            _aB.Aim(_aiming);
+        }
+        if (context.canceled)
+        {
+            _aiming = false;
+            _aB.Aim(_aiming);
         }
     }
 }

@@ -24,4 +24,8 @@ public class AnimationBehaviour : MonoBehaviour
     {
         animator.SetBool("Falling", false);
     }
+    public void Aim(bool aiming)
+    {
+        animator.SetBool("Aiming", aiming);
+    }
 }
