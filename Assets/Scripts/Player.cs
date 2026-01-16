@@ -79,4 +79,13 @@ public class Player : MonoBehaviour, InputSystem_Actions.IPlayerActions
             _aB.Aim(_aiming);
         }
     }
+
+    public void OnShoot(InputAction.CallbackContext context)
+    {
+        if (context.performed)
+            if (_aiming)
+            {
+
+            }
+    }
 }
