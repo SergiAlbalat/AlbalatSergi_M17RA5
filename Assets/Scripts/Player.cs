@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 [RequireComponent(typeof(MoveBehaviour))]
 
 public class Player : MonoBehaviour, InputSystem_Actions.IPlayerActions
@@ -10,6 +11,7 @@ public class Player : MonoBehaviour, InputSystem_Actions.IPlayerActions
     private bool _running = false;
     private bool _dancing = false;
     private bool _aiming = false;
+    private bool _interact = false;
     private MoveBehaviour _mB;
     private void Awake()
     {
@@ -96,6 +98,28 @@ public class Player : MonoBehaviour, InputSystem_Actions.IPlayerActions
         if (context.canceled)
         {
             _aB.Shoot(false);
+        }
+    }
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.CompareTag("HouseDoor"))
+        {
+            _interact = true;
+        }
+    }
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.gameObject.CompareTag("HouseDoor"))
+        {
+            _interact = false;
+        }
+    }
+
+    public void OnInteract(InputAction.CallbackContext context)
+    {
+        if(context.performed && _interact)
+        {
+            SceneManager.LoadScene("House");
         }
     }
 }
