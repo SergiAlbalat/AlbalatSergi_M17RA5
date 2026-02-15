@@ -119,7 +119,13 @@ public class Player : MonoBehaviour, InputSystem_Actions.IPlayerActions
     {
         if(context.performed && _interact)
         {
-            SceneManager.LoadScene("House");
+            if(SceneManager.GetActiveScene().name == "House")
+            {
+                SceneManager.LoadScene("Mountain");
+            }else if(SceneManager.GetActiveScene().name == "Mountain")
+            {
+                SceneManager.LoadScene("House");
+            }
         }
     }
 }
