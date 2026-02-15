@@ -279,8 +279,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::MoveBehaviour
   speed: 4
   sprintMultiplier: 2
-  cameraPosition: {fileID: 0}
-  aimCameraPosition: {fileID: 0}
+  cameraPosition: {fileID: 2141292495}
+  aimCameraPosition: {fileID: 691052178}
   steerSpeed: 10
   gravity: -2
   jumpForce: 2
@@ -704,7 +704,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 691052172}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.027526261, y: -0.058540925, z: -0.0016147972, w: 0.9979042}
+  m_LocalRotation: {x: -0.027557898, y: -0.03371495, z: -0.00092999573, w: 0.9990511}
   m_LocalPosition: {x: -0.32121998, y: 1.5653669, z: 2.526861}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
