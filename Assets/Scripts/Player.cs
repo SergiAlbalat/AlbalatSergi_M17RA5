@@ -128,4 +128,17 @@ public class Player : MonoBehaviour, InputSystem_Actions.IPlayerActions
             }
         }
     }
+
+    public void OnSave(InputAction.CallbackContext context)
+    {
+        if(context.performed)
+        {
+            GameManager gm = FindFirstObjectByType<GameManager>();
+            if (gm != null)
+            {
+                gm.SaveGame();
+                Debug.Log("Game Saved");
+            }
+        }
+    }
 }

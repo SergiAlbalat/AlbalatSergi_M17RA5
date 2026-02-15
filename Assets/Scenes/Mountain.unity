@@ -739,6 +739,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::GameManager
   beltItem: {fileID: 420332524}
   beltEquipment: {fileID: 1552832303}
+  player: {fileID: 370139032}
+  characterController: {fileID: 370139033}
 --- !u!4 &468562279
 Transform:
   m_ObjectHideFlags: 0
