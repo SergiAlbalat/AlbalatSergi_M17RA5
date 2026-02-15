@@ -8,6 +8,7 @@ This game shows how the protagonist(Pako Pakensis) sees the world and how he is 
 - Left click while aiming: Shoot
 - F: Dance
 - E: Interact
+- Q: Save Game
 
 ## Instruccions:
 Climb the initial mountain to reach the forest of madness and after that jump to the forgotten basin. There find the belt of the crazy king and enter to the house to reach the highest level of madness ever imagined.
